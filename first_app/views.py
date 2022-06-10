@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.http.response import HttpResponse, HttpResponseNotFound,Http404
+from django.http.response import HttpResponse, HttpResponseNotFound, Http404, HttpResponseRedirect
+from django.shortcuts import redirect
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -20,7 +23,7 @@ def news_view(request, topic):
         result = articles[topic]
         return HttpResponse(articles[topic])
     except:
-        raise Http404("404 GENERIC ERROR") # for 404.html template.
+        raise Http404("404 GENERIC ERROR")  # for 404.html template.
 
 
 def add_view(request, num1, num2):
@@ -28,3 +31,17 @@ def add_view(request, num1, num2):
     add_result = num1 + num2
     result = f"{num1}+{num2} ={add_result}"
     return HttpResponse(str(result))
+
+
+# domain.com/first_app/0 --> domain.com/first_app/sports
+def num_page_view(request, num_page):
+    topics_list = list(articles.keys())  # ['sports','finance','politics']
+
+    topic = topics_list[num_page]
+
+    # webpage = reverse('topic_page', args=[topic])
+    return HttpResponseRedirect(reverse('topic_page', args=[topic]))
+
+
+    # response = redirect('/first_app/<str:topics>')
+    # return HttpResponse(response)
