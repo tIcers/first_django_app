@@ -10,7 +10,8 @@ from . import views
 # ]
 
 urlpatterns = [
-    path('<int:num_page>', views.num_page_view),
-    path('<str:topic>/', views.news_view, name='topic_page'),
+    # path('<int:num_page>', views.num_page_view),
+    # path('<str:topic>/', views.news_view, name='topic_page'),
 
+    path('', views.simple_view)  # domain.com/first_app
 ]
