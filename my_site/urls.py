@@ -16,14 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.http.response import HttpResponse
-
-
-def home_view(request):
-    return HttpResponse("Home page!")
-
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('first_app/', include('first_app.urls')),
-    path('', home_view)
+    path('', views.home_view)
 ]
